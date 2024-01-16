@@ -1,7 +1,7 @@
 /*
  * @Author: zhao - 🍉
  * @Date: 2020-03-15 22:48:39
- * @LastEditTime: 2022-03-16 02:21:45
+ * @LastEditTime: 2024-01-16 20:11:33
  * @LastEditors: zhao - 🍉
  * @Description:
  * @FilePath: /miniprogram-grid-luckdraw/src/index.ts
@@ -30,6 +30,9 @@ Component({
     deceleration: {type: Number, value: 60}, // 每次运行增大间隔时间 (秒/次)
     uniqueKey: {type: String, value: 'id'}, // 唯一key
     imageSrcKey: {type: String, value: 'src'}, // 奖品图片字段名
+    imageRadius: {type: Number, value: 0}, // 奖品图圆角
+    prizeNameKey: {type: String, value: 'name'}, // 奖品名字字段名
+    prizeNameStyle: {type: String, value: ''}, // 奖品名字样式
     activeStyle: {type: String, value: 'background-color: rgba(255, 249, 70, 0.7);border-radius: 20rpx;'} // 当前选中的样式
   },
   data: {
@@ -75,7 +78,6 @@ Component({
 
 
         this.setData({currentLuckIndex: count % list.length})
-        console.log(initSpeed)
         setTimeout(() => {
           this.run(res, count + 1, rootResolve, initSpeed)
         }, initSpeed)
@@ -84,10 +86,14 @@ Component({
     },
     parseGridStyle() {
       const gridStyleList = []
-      const {gridItemHeight, gridItemWidth, gridItemGap} = this.data
+      const {
+        gridItemHeight, gridItemWidth, gridItemGap, imageRadius
+      } = this.data
       const styles = [
         `width: ${gridItemWidth}rpx`,
         `height: ${gridItemHeight}rpx`,
+        `border-radius: ${imageRadius}rpx`,
+        'overflow: hidden',
         `top: ${gridItemHeight + gridItemGap + gridItemGap}rpx`,
         `left: ${gridItemWidth + gridItemGap + gridItemGap}rpx`,
       ]

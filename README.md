@@ -28,14 +28,27 @@ npm install --save miniprogram-grid-luckdraw
 3. 在wxml文件 挂载 luckdraw 组件,并声明id
 
 ```
-<GridLuckdraw id="GridLuckdrawRef" />
+const prizeList = [
+  {id:1, name: '西瓜'},
+  {id:2, name: '苹果'},
+  {id:3, name: '香蕉'},
+  {id:4, name: '橙子'},
+  {id:5, name: '葡萄'},
+  {id:6, name: '梨子'},
+  {id:7, name: '哈密瓜'},
+  {id:8, name: '草莓'},
+]
+<GridLuckdraw list="{{ prizeList }}" id="GridLuckdrawRef" />
 ```
 
 4. 在js文件中调用
 
 ```
-const id = 1
-this.selectComponent('#GridLuckdrawRef').setup({ id })
+
+const id = 1 // 抽奖接口返回的奖品ID
+this.selectComponent('#GridLuckdrawRef').setup({ id }).then(() => {
+  wx.showToast({ title: '抽中了' })
+})
 ```
 
 ## 参数说明
@@ -45,6 +58,10 @@ this.selectComponent('#GridLuckdrawRef').setup({ id })
 | list          |  array        | 是     | []     | 奖品列表                          |
 | uniqueKey     | string        | 否     | 'id'   | 唯一key                           |
 | imageSrcKey   | string        | 否     | 'src'  | 奖品图片字段名                      |
+| imageRadius   | number        | 否     | 0      | 奖品图片圆角                     |
+| prizeNameKey   | string       | 否     | 'name' | 奖品图片圆角                     |
+| prizeNameStyle | string       | 否     | ''     | 奖品图片圆角                     |
+| imageRadius   | number        | 否     | 0      | 奖品图片圆角                     |
 | gridItemGap   | number        | 否     | 10     | 奖品布局间隙                      |
 | gridItemWidth | number        | 否     | 140    | 奖品宽度                          |
 | gridItemHeight| number        | 否     | 130    | 奖品高度                          |

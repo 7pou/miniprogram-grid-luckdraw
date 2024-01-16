@@ -4,6 +4,7 @@
     <view class="grid-item" style="{{ gridStyleList[index] }}" wx:key="{{item.id}}">
       <view class="mask" style="{{ activeStyle }}" hidden="{{index !== currentLuckIndex}}"></view>
       <image src="{{item[imageSrcKey]}}"></image>
+      <view class="name" style="{{ prizeNameStyle }}" wx:if="{{ item[prizeNameKey] }}">{{ item[prizeNameKey] }}</view>
     </view>
   </block>
   
